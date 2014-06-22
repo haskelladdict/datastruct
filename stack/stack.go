@@ -9,12 +9,12 @@ type Stack struct {
 	stack []interface{}
 }
 
-// NewStack creates and returns a new Stack structure
+// NewStack creates and returns a new stack structure
 func NewStack() *Stack {
 	return &Stack{}
 }
 
-// Pop removes the last element from a Stack
+// Pop removes the last element from a stack
 func (s *Stack) Pop() (interface{}, error) {
 	var item interface{}
 	if len(s.stack) == 0 {
@@ -26,7 +26,7 @@ func (s *Stack) Pop() (interface{}, error) {
 	return item, nil
 }
 
-// Push add an element to a Stack
+// Push element to the stack
 func (s *Stack) Push(i interface{}) {
 	s.stack = append(s.stack, i)
 }
