@@ -10,7 +10,7 @@ type Stack struct {
 }
 
 // NewStack creates and returns a new stack structure
-func NewStack() *Stack {
+func New() *Stack {
 	return &Stack{}
 }
 

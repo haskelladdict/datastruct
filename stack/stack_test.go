@@ -8,9 +8,9 @@ import (
 func Test_stack(t *testing.T) {
 
 	as := []int{1, 2, 3, 4}
-	aStack := NewStack()
-	bStack := NewStack()
-	cStack := NewStack()
+	aStack := New()
+	bStack := New()
+	cStack := New()
 	for _, a := range as {
 		aStack.Push(a)
 		bStack.Push(a)

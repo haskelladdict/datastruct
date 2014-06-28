@@ -1,8 +1,6 @@
 package pqueue
 
-import (
-	"container/heap"
-)
+import "container/heap"
 
 // Item represents a single element of a Priority queue
 type Item struct {
@@ -23,22 +21,19 @@ func New(items []*Item) *Pqueue {
 
 // Pop removes and returns the highest priority item of the queue
 func (pq *Pqueue) Pop() *Item {
-	p := (*priorityQueue)(pq)
-	return heap.Pop(p).(*Item)
+	return heap.Pop((*priorityQueue)(pq)).(*Item)
 }
 
 // Push adds a new item to the priority queue.
 func (pq *Pqueue) Push(item *Item) {
-	p := (*priorityQueue)(pq)
-	heap.Push(p, item)
+	heap.Push((*priorityQueue)(pq), item)
 }
 
 // Update updates the Priority and Value of an item in the Priority queue
 func (pq *Pqueue) Update(item *Item, Value interface{}, Priority int) {
 	item.Val = Value
 	item.Priority = Priority
-	p := (*priorityQueue)(pq)
-	heap.Fix(p, item.Index)
+	heap.Fix((*priorityQueue)(pq), item.Index)
 }
 
 // PriorityQueue implements a Priority queue
@@ -50,21 +45,22 @@ func (p priorityQueue) Len() int {
 }
 
 // Less implements less than for a PriorityQueue
-func (p *priorityQueue) Less(i, j int) bool {
-	return (*p)[i].Priority < (*p)[j].Priority
+func (p priorityQueue) Less(i, j int) bool {
+	return p[i].Priority < p[j].Priority
 }
 
 // Swap implements swapping for a PriorityQueue
-func (p *priorityQueue) Swap(i, j int) {
-	(*p)[i], (*p)[j] = (*p)[j], (*p)[i]
-	(*p)[i].Index = j
-	(*p)[j].Index = i
+func (p priorityQueue) Swap(i, j int) {
+	p[i], p[j] = p[j], p[i]
+	p[i].Index = i
+	p[j].Index = j
 }
 
 // Push adds an element to the PriorityQueue
 func (p *priorityQueue) Push(i interface{}) {
+	n := len(*p)
 	item := i.(*Item)
-	item.Index = len(*p)
+	item.Index = n
 	*p = append(*p, item)
 }
 
